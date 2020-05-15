@@ -1,0 +1,27 @@
+{
+  "family": "<custom-task-definition-name>",
+  "networkMode": "bridge",
+  "containerDefinitions": [
+    {
+      "name": "<custom-container-name>",
+      "image": "docker.io/<dockerhub-username>/<docker-image-name>:<image-tag>",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 0,
+          "protocol": "tcp"
+        }
+      ],
+      "repositoryCredentials": {
+        "credentialsParameter": "arn:aws:secretsmanager:<region>:<aws-acct-num>:secret:<secret-id>"
+      },
+      "essential": true
+    }
+  ],
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "cpu": "256",
+  "memory": "256",
+  "executionRoleArn": "arn:aws:iam::<aws-acct-num>:role/ecsTaskExecutionRole"
+}
